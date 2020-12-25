@@ -1,0 +1,41 @@
+{
+  "name": "prolog-employee",
+  "version": "1.0.0",
+  "description": "prolog with tau prolog",
+  "main": "index",
+  "dependencies": {
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-babel": "^8.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-livereload": "^4.0.2",
+    "gulp-pug": "^4.0.1",
+    "gulp-sass": "^4.1.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-uglify": "^3.0.2",
+    "gulp-zip": "^5.0.2",
+    "static-server": "^2.2.1",
+    "tau-prolog": "^0.3.0",
+    "vinyl-ftp": "^0.6.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Abdulaziz5h/Prolog-Employee.git"
+  },
+  "keywords": [
+    "prolog",
+    "tau",
+    "employee-Hierarchical"
+  ],
+  "author": "Abdulaziz_Shshrour & Abdulqader_AlNajjar & Mohamed_Abo_Dan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Abdulaziz5h/Prolog-Employee/issues"
+  },
+  "homepage": "https://github.com/Abdulaziz5h/Prolog-Employee#readme"
+}
