@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" ng-app="calendarApp" ng-cloak="true">
+<html lang="ar" dir="lte" ng-app="calendarApp" ng-cloak="true">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +10,208 @@
     <link rel="stylesheet" href="css/main.css">
   </head>
   <body>
-    <button class="btn btn-sm btn-success">click</button>
+    <h1 class="p-3 text-center bg-dark text-white mb-3">Employee Hierarchical</h1>
+    <div class="container"> 
+      <div class="card mb-3">
+        <div class="card-header text-center"><strong class="text-capitalize">general works</strong></div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <div class="form-group">
+                <label>find max salary</label>
+                <div class="d-flex">
+                  <input class="form-control" id="maxSalary" type="text" disabled>
+                  <button class="btn btn-info ml-3 text-nowrap px-3 get-max-salary">apply</button>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 border-left">
+              <div class="form-group">
+                <label>find min salary</label>
+                <div class="d-flex">
+                  <input class="form-control" id="minSalary" type="text" disabled>
+                  <button class="btn btn-info ml-3 text-nowrap px-3 get-min-salary">apply</button>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <hr>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="form-group">
+                <label>find max Experience Employe and his salary</label>
+                <div class="d-flex">
+                  <input class="form-control" id="maxExper" type="text" disabled>
+                  <button class="btn btn-info ml-3 text-nowrap px-3 get-max-exper">apply</button>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 border-left">
+              <div class="form-group">
+                <label>find min Experience Employe and his salary</label>
+                <div class="d-flex">
+                  <input class="form-control" id="minExper" type="text" disabled>
+                  <button class="btn btn-info ml-3 text-nowrap px-3 get-min-exper">apply</button>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <hr>
+            </div>
+            <div class="col-12">
+              <div class="form-group">
+                <label>find sum of employess salary</label>
+                <div class="d-flex">
+                  <input class="form-control" id="sum" type="text" disabled>
+                  <button class="btn btn-info ml-3 text-nowrap px-3 get-sum">apply</button>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <hr>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="form-group">
+                <label>get learn road map</label>
+                <div class="d-flex align-items-end">
+                  <div class="pr-3"> 
+                    <label>select target knowlage</label>
+                    <select class="custom-select">
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label>select employee</label>
+                    <select class="custom-select">
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                    </select>
+                  </div>
+                  <button class=" btn btn-info ml-3 text-nowrap px-3 get-to-learn">apply</button>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 border-left">
+              <div class="form-group">
+                <label>find best employee for task</label>
+                <label>select knowlages</label>
+                <select class="custom-select" multiple>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>2</option>
+                </select>
+                <div class="d-flex pt-3">
+                  <input class="form-control" type="text" disabled>
+                  <button class=" btn btn-info ml-3 text-nowrap px-3 best-to-specific-task">apply</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer"> </div>
+      </div>
+      <div class="card">
+        <div class="card-header text-center"><strong class="text-capitalize">merge sort</strong></div>
+        <div class="card-body">
+          <table class="table table-sm table-border border table-striped text-center m-0">
+            <thead class="thead">
+              <tr>
+                <td>Employee</td>
+                <td class="merge" data-merge="1">salary</td>
+                <td class="merge" data-merge="3">Experience</td>
+                <td>Knowledges</td>
+                <td class="merge" data-merge="5">Number of Knowlage</td>
+              </tr>
+            </thead>
+            <tbody class="tbody"></tbody>
+          </table>
+        </div>
+        <div class="card-footer"> </div>
+      </div>
+    </div>
+    <button class="btn rounded-circle btn-secondary flout-button" data-toggle="modal" data-target="#addEmployee"><strong>+</strong></button>
+    <button class="btn rounded-circle btn-primary flout-button" data-toggle="modal" data-target="#addKnowlageNode" style="bottom: 90px"><strong>+</strong></button>
+    <div class="modal fade" id="addEmployee" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+          <div class="modal-header"><strong class="modal-title">Add Employee</strong>
+            <button class="btn btn-sm btn-default" type="button" data-dismiss="modal"><strong>X</strong></button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-12">
+                <div class="form-group">
+                  <label>employee name</label>
+                  <input class="form-control" type="text">
+                  <label>Experience</label>
+                  <input class="form-control" type="number">
+                  <label>employee salary</label>
+                  <input class="form-control" type="number">
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group">
+                  <label>select employee knowlages</label>
+                  <select class="custom-select" multiple>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>2</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-sm btn-success px-3">OK</button>
+            <button class="btn btn-sm btn-outline-secondary px-3" type="button" data-dismiss="modal">close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="addKnowlageNode" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+          <div class="modal-header"><strong class="modal-title">Add Knowlage Node</strong>
+            <button class="btn btn-sm btn-default" type="button" data-dismiss="modal"><strong>X</strong></button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-12">
+                <div class="form-group">
+                  <label>Knowlage name</label>
+                  <input class="form-control" type="text">
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group">
+                  <label>select parent knowlages node</label>
+                  <select class="custom-select">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>2</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-sm btn-success px-3">OK</button>
+            <button class="btn btn-sm btn-outline-secondary px-3" type="button" data-dismiss="modal">close</button>
+          </div>
+        </div>
+      </div>
+    </div>
     <script type="text/javascript" src="http://localhost:35729/livereload.js"></script>
     <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="js/popper.min.js"></script>

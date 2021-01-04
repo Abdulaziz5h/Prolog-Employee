@@ -1,2 +1,3 @@
+.thead td{position:relative}.thead td:after{content:"";width:0;height:0;border:solid 8px transparent;position:absolute;top:50%;left:10px}.thead td.max:after{border-top-color:#333;-webkit-transform:translateY(-20%);transform:translateY(-20%)}.thead td.min:after{-webkit-transform:translateY(-60%);transform:translateY(-60%);border-bottom-color:#333}label{text-transform:capitalize}.flout-button{position:fixed;bottom:40px;left:40px}
 
 /*# sourceMappingURL=main.css.map */

@@ -1,0 +1,34 @@
+.thead{
+    td{
+        position: relative;
+        &:after {
+            content: "";
+            width: 0;
+            height: 0;
+            border: solid 8px transparent;
+            position: absolute;
+            top: 50%;
+            left: 10px;
+        }
+        &.max {
+            &:after {
+                border-top-color: #333;
+                transform: translateY(-20%);
+            }
+        }
+        &.min {
+            &:after {
+                transform: translateY(-60%);
+                border-bottom-color: #333;
+            }
+        }
+    } 
+}
+label {
+    text-transform: capitalize;
+}
+.flout-button {
+    position: fixed;
+    bottom: 40px;
+    left: 40px;
+}

@@ -1,5 +1,5 @@
 doctype html
-html(lang="ar" dir="rtl" ng-app='calendarApp' ng-cloak='true')
+html(lang="ar" dir="lte" ng-app='calendarApp' ng-cloak='true')
     head
         meta(charset="utf-8")
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
@@ -7,5 +7,161 @@ html(lang="ar" dir="rtl" ng-app='calendarApp' ng-cloak='true')
         title Employee Hierarchical
         include includes/css-link.pug
     body
-        button.btn.btn-sm.btn-success click
+        h1.p-3.text-center.bg-dark.text-white.mb-3 Employee Hierarchical
+        .container 
+            .card.mb-3
+                .card-header.text-center
+                    strong.text-capitalize general works
+                .card-body
+                    .row
+                        .col-12.col-md-6
+                            .form-group
+                                label find max salary
+                                div.d-flex
+                                    input(class="form-control" id="maxSalary" type="text" disabled)
+                                    button.btn.btn-info.ml-3.text-nowrap.px-3.get-max-salary apply
+                        .col-12.col-md-6.border-left
+                            .form-group
+                                label find min salary
+                                div.d-flex
+                                    input(class="form-control" id="minSalary" type="text" disabled)
+                                    button.btn.btn-info.ml-3.text-nowrap.px-3.get-min-salary apply
+                        .col-12
+                            hr
+                        .col-12.col-md-6
+                            .form-group
+                                label find max Experience Employe and his salary
+                                div.d-flex
+                                    input(class="form-control" id="maxExper" type="text" disabled)
+                                    button.btn.btn-info.ml-3.text-nowrap.px-3.get-max-exper apply
+                        .col-12.col-md-6.border-left
+                            .form-group
+                                label find min Experience Employe and his salary
+                                div.d-flex
+                                    input(class="form-control" id="minExper" type="text" disabled)
+                                    button.btn.btn-info.ml-3.text-nowrap.px-3.get-min-exper apply
+                        .col-12
+                            hr
+                        .col-12
+                            .form-group
+                                label find sum of employess salary
+                                div.d-flex
+                                    input(class="form-control" id="sum" type="text" disabled)
+                                    button.btn.btn-info.ml-3.text-nowrap.px-3.get-sum apply
+                        .col-12
+                            hr
+                        .col-12.col-md-6
+                            .form-group
+                                label get learn road map
+                                div.d-flex.align-items-end
+                                    div.pr-3 
+                                        label select target knowlage
+                                        select(class="custom-select")
+                                            option 1
+                                            option 2
+                                            option 3
+                                            option 4
+                                    div
+                                        label select employee
+                                        select(class="custom-select")
+                                            option 1
+                                            option 2
+                                            option 3
+                                            option 4
+                                    button(class=" btn btn-info ml-3 text-nowrap px-3 get-to-learn") apply
+                        .col-12.col-md-6.border-left
+                            .form-group
+                                label find best employee for task
+                                label select knowlages
+                                select(class="custom-select" multiple)
+                                    option 1
+                                    option 2
+                                    option 3
+                                    option 4
+                                    option 2
+                                div.d-flex.pt-3
+                                    input(class="form-control" type="text" disabled)
+                                    button(class=" btn btn-info ml-3 text-nowrap px-3 best-to-specific-task") apply
+                        
+                .card-footer 
+            .card
+                .card-header.text-center
+                    strong.text-capitalize merge sort
+                .card-body
+                    table.table.table-sm.table-border.border.table-striped.text-center.m-0
+                        thead.thead
+                            tr
+                                td Employee
+                                td(class="merge" data-merge="1") salary
+                                td(class="merge" data-merge="3") Experience
+                                td Knowledges
+                                td(class="merge" data-merge="5") Number of Knowlage
+
+                        tbody.tbody
+                            
+
+                .card-footer 
+        button(class="btn rounded-circle btn-secondary flout-button" data-toggle="modal" data-target="#addEmployee")
+            strong +
+        button(class="btn rounded-circle btn-primary flout-button" data-toggle="modal" data-target="#addKnowlageNode" style="bottom: 90px")
+            strong +
+
+        div(class="modal fade" id="addEmployee" tabindex="-1" role="dialog")
+            div(class="modal-dialog modal-md" role="document")
+                div(class="modal-content")
+                    div(class="modal-header")
+                        strong(class="modal-title") Add Employee
+                        button(type="button" class="btn btn-sm btn-default" data-dismiss="modal")
+                            strong X
+                    div(class="modal-body")
+                        .row
+                            .col-12
+                                .form-group
+                                    label employee name
+                                    input(type="text" class="form-control")
+                                    label Experience
+                                    input(type="number" class="form-control")
+                                    label employee salary
+                                    input(type="number" class="form-control")
+                            .col-12
+                                .form-group
+                                    label select employee knowlages
+                                    select(class="custom-select" multiple)
+                                        option 1
+                                        option 2
+                                        option 3
+                                        option 4
+                                        option 2
+                            
+                    div(class="modal-footer")
+                        button(class="btn btn-sm btn-success px-3") OK
+                        button(type="button" class="btn btn-sm btn-outline-secondary px-3" data-dismiss="modal") close
+                    
+        div(class="modal fade" id="addKnowlageNode" tabindex="-1" role="dialog")
+            div(class="modal-dialog modal-md" role="document")
+                div(class="modal-content")
+                    div(class="modal-header")
+                        strong(class="modal-title") Add Knowlage Node
+                        button(type="button" class="btn btn-sm btn-default" data-dismiss="modal")
+                            strong X
+                    div(class="modal-body")
+                        .row
+                            .col-12
+                                .form-group
+                                    label Knowlage name
+                                    input(type="text" class="form-control")
+                            .col-12
+                                .form-group
+                                    label select parent knowlages node
+                                    select(class="custom-select")
+                                        option 1
+                                        option 2
+                                        option 3
+                                        option 4
+                                        option 2
+                            
+                    div(class="modal-footer")
+                        button(class="btn btn-sm btn-success px-3") OK
+                        button(type="button" class="btn btn-sm btn-outline-secondary px-3" data-dismiss="modal") close
+                    
         include includes/script-links.pug
