@@ -56,32 +56,40 @@ html(lang="ar" dir="lte" ng-app='calendarApp' ng-cloak='true')
                                 div.d-flex.align-items-end
                                     div.pr-3 
                                         label select target knowlage
-                                        select(class="custom-select")
-                                            option 1
-                                            option 2
-                                            option 3
-                                            option 4
+                                        select(class="custom-select" id="employeeList")
+                                            option(value="[1 , ahmad , 100 , 2 , [a , b , c]]" selected) ahmad
+                                            option(value="[2 , amjad , 300 , 3 , [a , c , d]]") amjad
+                                            option(value="[3 , ali , 200 , 1 , [a , d , e]]") ali
+                                            option(value="[4 , fadi , 400 , 4 , [a , e , f]]") fadi
+                                            option(value="[4 , hadi , 700 , 3 , [a , e]]") hadi
                                     div
                                         label select employee
-                                        select(class="custom-select")
-                                            option 1
-                                            option 2
-                                            option 3
-                                            option 4
+                                        select(class="custom-select" id="kownlage-single-select")
+                                            option(value="a" selected) a
+                                            option(value="c") c
+                                            option(value="d") d
+                                            option(value="b") b
+                                            option(value="t") t
+                                            option(value="r") r
+                                            option(value="i") i
                                     button(class=" btn btn-info ml-3 text-nowrap px-3 get-to-learn") apply
+                                div
+                                    label road map accepted
+                                    ul.list-unstyled.p-0.m-0.list-maps
+
                         .col-12.col-md-6.border-left
                             .form-group
                                 label find best employee for task
                                 label select knowlages
-                                select(class="custom-select" multiple)
-                                    option 1
-                                    option 2
-                                    option 3
-                                    option 4
-                                    option 2
-                                div.d-flex.pt-3
-                                    input(class="form-control" type="text" disabled)
-                                    button(class=" btn btn-info ml-3 text-nowrap px-3 best-to-specific-task") apply
+                                select(class="custom-select" multiple id="knowlages-multiple-select")
+                                    option(value="a" selected) a
+                                    option(value="v") v
+                                    option(value="c") c
+                                    option(value="e") e
+                                    option(value="d") d
+                                div.d-flex.pt-3.align-items-start
+                                    textarea(class="form-control" id="best-to-specific-task" type="text" disabled)
+                                    button(class=" btn btn-info ml-3 text-nowrap px-3 get-best-to-specific-task") apply
                         
                 .card-footer 
             .card
@@ -96,7 +104,6 @@ html(lang="ar" dir="lte" ng-app='calendarApp' ng-cloak='true')
                                 td(class="merge" data-merge="3") Experience
                                 td Knowledges
                                 td(class="merge" data-merge="5") Number of Knowlage
-
                         tbody.tbody
                             
 

@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Employee Hierarchical</title>
-    <link rel="stylesheet" href="css/all.min.css">
-    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/main.css">
   </head>
   <body>
@@ -76,23 +75,31 @@
                 <div class="d-flex align-items-end">
                   <div class="pr-3"> 
                     <label>select target knowlage</label>
-                    <select class="custom-select">
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
+                    <select class="custom-select" id="employeeList">
+                      <option value="[1 , ahmad , 100 , 2 , [a , b , c]]" selected>ahmad</option>
+                      <option value="[2 , amjad , 300 , 3 , [a , c , d]]">amjad</option>
+                      <option value="[3 , ali , 200 , 1 , [a , d , e]]">ali</option>
+                      <option value="[4 , fadi , 400 , 4 , [a , e , f]]">fadi</option>
+                      <option value="[4 , hadi , 700 , 3 , [a , e]]">hadi</option>
                     </select>
                   </div>
                   <div>
                     <label>select employee</label>
-                    <select class="custom-select">
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
+                    <select class="custom-select" id="kownlage-single-select">
+                      <option value="a" selected>a</option>
+                      <option value="c">c</option>
+                      <option value="d">d</option>
+                      <option value="b">b</option>
+                      <option value="t">t</option>
+                      <option value="r">r</option>
+                      <option value="i">i</option>
                     </select>
                   </div>
                   <button class=" btn btn-info ml-3 text-nowrap px-3 get-to-learn">apply</button>
+                </div>
+                <div>
+                  <label>road map accepted</label>
+                  <ul class="list-unstyled p-0 m-0 list-maps"></ul>
                 </div>
               </div>
             </div>
@@ -100,16 +107,16 @@
               <div class="form-group">
                 <label>find best employee for task</label>
                 <label>select knowlages</label>
-                <select class="custom-select" multiple>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>2</option>
+                <select class="custom-select" multiple id="knowlages-multiple-select">
+                  <option value="a" selected>a</option>
+                  <option value="v">v</option>
+                  <option value="c">c</option>
+                  <option value="e">e</option>
+                  <option value="d">d</option>
                 </select>
-                <div class="d-flex pt-3">
-                  <input class="form-control" type="text" disabled>
-                  <button class=" btn btn-info ml-3 text-nowrap px-3 best-to-specific-task">apply</button>
+                <div class="d-flex pt-3 align-items-start">
+                  <textarea class="form-control" id="best-to-specific-task" type="text" disabled></textarea>
+                  <button class=" btn btn-info ml-3 text-nowrap px-3 get-best-to-specific-task">apply</button>
                 </div>
               </div>
             </div>

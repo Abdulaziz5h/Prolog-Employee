@@ -287,54 +287,25 @@ let employeeList = `[[1 , ahmad , 100 , 2 , [a , b , c]],[2 , amjad , 300 , 3 , 
 
 var session = pl.create();
 
-
 //Finding the right employees for a specific task
-
-// $('.best-to-specific-task').on('click', function() {
-//     console.log(`solve(${employeeList}, Ans, [a,c]).`);
-//     session.consult(Employee, {
-//         success: function() { 
-//             session.query(`solve(${employeeList}, Ans, [a,c]).`, {
-//                 success: function(goal) { 
-//                     session.answer({
-//                         success: function(answer) {
-//                             console.log(session.format_answer(answer));
-//                             let res = session.format_answer(answer).split('=')[1];
-//                             res = res.split('[')[1];
-//                             res = res.split(']')[0];
-//                             res = res.split(',');
-//                             $('#maxSalary').val(`${res[1]} his salary is : ${res[2]}`);
-//                         },
-//                     });
-//                 },
-//                 error: function(err) { console.log(err) }
-//             });
-//         },
-//     });
-// })
-
-
-// solve(${employeeList}, [a,c], Ans).
-
-// Get To Learn
-$('.get-to-learn').on('click', () => {
+$('.get-best-to-specific-task').on('click', function() {
+    let listKnowlages = $('#knowlages-multiple-select').val();
     session.consult(Employee, {
         success: function() { 
-            session.query(`getToLearn([1 , ahmad , 100 , 2 , [a , b]], Ans, c).`, {
+            session.query(`solve(${employeeList}, [${listKnowlages}], Ans).`, {
                 success: function(goal) { 
                     session.answer({
                         success: function(answer) {
-                            console.log(session.format_answer(answer))
-                            session.answer({
-                                success: function(answer) {
-                                    console.log(session.format_answer(answer))
-                                }
+                            let textarea = $('#best-to-specific-task');
+                            textarea.val('');
+                            let ans = session.format_answer(answer);
+                            ans = ans.split("=")[1];
+                            ans = ans.trim().substring(1, ans.length-4);
+                            ans = ans.split(',');
+                            ans.forEach(item => {
+                                textarea.val(textarea.val() + item + ', ');
                             })
-                            // let res = session.format_answer(answer).split('=')[1];
-                            // res = res.split('[')[1];
-                            // res = res.split(']')[0];
-                            // res = res.split(',');
-                            // $('#maxSalary').val(`${res[1]} his salary is : ${res[2]}`);
+                            textarea.val(textarea.val().substring(0, textarea.val().length-2))
                         },
                     });
                 },
@@ -342,6 +313,30 @@ $('.get-to-learn').on('click', () => {
             });
         },
     });
+})
+
+// Get To Learn
+var count_answers = 0;
+var callback = function(answer) {
+    if (answer === false || answer === null) {
+      return
+    }
+    // loop
+    let list = $(".list-maps")
+    
+    list.append(`<li>${pl.format_answer(answer)}</li>`);
+    session.answer(callback)
+}
+$('.get-to-learn').on('click', () => {
+    $(".list-maps").text("");
+    
+    const selectedeEmployee = $('#employeeList').val();
+    const kownlageSingleSelect = $('#kownlage-single-select').val();
+    var parsed = session.consult(Employee);
+
+    var query = session.query(`getToLearn(${selectedeEmployee}, Ans, ${kownlageSingleSelect}).`);
+
+    session.answer(callback)
 })
 
 
