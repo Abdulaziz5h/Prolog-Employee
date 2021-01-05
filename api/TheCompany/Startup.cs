@@ -46,9 +46,7 @@ namespace TheCompany
             {
                 options.AddPolicy("CorsPolicy", builder =>
                 {
-                    builder.AllowAnyOrigin().AllowAnyMethod()
-                    .WithOrigins("http://localhost:8000")
-                    .AllowAnyHeader().AllowCredentials();
+                    builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
                 });
             });
 
