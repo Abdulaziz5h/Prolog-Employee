@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TheCompany.Main.Data\TheCompany.Main.Data.csproj" />
+    <ProjectReference Include="..\TheCompany.Main.IData\TheCompany.Main.IData.csproj" />
+    <ProjectReference Include="..\TheCompany.Model\TheCompany.Model.csproj" />
+    <ProjectReference Include="..\TheCompany.SQLServer\TheCompany.SQLServer.csproj" />
+  </ItemGroup>
+
+
+</Project>

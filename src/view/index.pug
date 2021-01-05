@@ -57,21 +57,22 @@ html(lang="ar" dir="lte" ng-app='calendarApp' ng-cloak='true')
                                     div.pr-3 
                                         label select target knowlage
                                         select(class="custom-select" id="employeeList")
-                                            option(value="[1 , ahmad , 100 , 2 , [a , b , c]]" selected) ahmad
-                                            option(value="[2 , amjad , 300 , 3 , [a , c , d]]") amjad
-                                            option(value="[3 , ali , 200 , 1 , [a , d , e]]") ali
-                                            option(value="[4 , fadi , 400 , 4 , [a , e , f]]") fadi
-                                            option(value="[4 , hadi , 700 , 3 , [a , e]]") hadi
+                                        
+                                            //- option(value="[1 , ahmad , 100 , 2 , [a , b , c]]" selected) ahmad
+                                            //- option(value="[2 , amjad , 300 , 3 , [a , c , d]]") amjad
+                                            //- option(value="[3 , ali , 200 , 1 , [a , d , e]]") ali
+                                            //- option(value="[4 , fadi , 400 , 4 , [a , e , f]]") fadi
+                                            //- option(value="[4 , hadi , 700 , 3 , [a , e]]") hadi
                                     div
                                         label select employee
                                         select(class="custom-select" id="kownlage-single-select")
-                                            option(value="a" selected) a
-                                            option(value="c") c
-                                            option(value="d") d
-                                            option(value="b") b
-                                            option(value="t") t
-                                            option(value="r") r
-                                            option(value="i") i
+                                            //- option(value="a" selected) a
+                                            //- option(value="c") c
+                                            //- option(value="d") d
+                                            //- option(value="b") b
+                                            //- option(value="t") t
+                                            //- option(value="r") r
+                                            //- option(value="i") i
                                     button(class=" btn btn-info ml-3 text-nowrap px-3 get-to-learn") apply
                                 div
                                     label road map accepted
@@ -82,11 +83,11 @@ html(lang="ar" dir="lte" ng-app='calendarApp' ng-cloak='true')
                                 label find best employee for task
                                 label select knowlages
                                 select(class="custom-select" multiple id="knowlages-multiple-select")
-                                    option(value="a" selected) a
-                                    option(value="v") v
-                                    option(value="c") c
-                                    option(value="e") e
-                                    option(value="d") d
+                                    //- option(value="a" selected) a
+                                    //- option(value="v") v
+                                    //- option(value="c") c
+                                    //- option(value="e") e
+                                    //- option(value="d") d
                                 div.d-flex.pt-3.align-items-start
                                     textarea(class="form-control" id="best-to-specific-task" type="text" disabled)
                                     button(class=" btn btn-info ml-3 text-nowrap px-3 get-best-to-specific-task") apply
@@ -125,23 +126,18 @@ html(lang="ar" dir="lte" ng-app='calendarApp' ng-cloak='true')
                             .col-12
                                 .form-group
                                     label employee name
-                                    input(type="text" class="form-control")
+                                    input(type="text" class="form-control" id="EmpName")
                                     label Experience
-                                    input(type="number" class="form-control")
+                                    input(type="number" class="form-control" id="EmpExperience")
                                     label employee salary
-                                    input(type="number" class="form-control")
+                                    input(type="number" class="form-control" id="EmpSalary")
                             .col-12
                                 .form-group
                                     label select employee knowlages
-                                    select(class="custom-select" multiple)
-                                        option 1
-                                        option 2
-                                        option 3
-                                        option 4
-                                        option 2
+                                    select(class="custom-select" multiple id="Empknowlages")
                             
                     div(class="modal-footer")
-                        button(class="btn btn-sm btn-success px-3") OK
+                        button(class="btn btn-sm btn-success px-3 addEmp") OK
                         button(type="button" class="btn btn-sm btn-outline-secondary px-3" data-dismiss="modal") close
                     
         div(class="modal fade" id="addKnowlageNode" tabindex="-1" role="dialog")
@@ -156,19 +152,14 @@ html(lang="ar" dir="lte" ng-app='calendarApp' ng-cloak='true')
                             .col-12
                                 .form-group
                                     label Knowlage name
-                                    input(type="text" class="form-control")
+                                    input(type="text" class="form-control" id="edgeSecond")
                             .col-12
                                 .form-group
                                     label select parent knowlages node
-                                    select(class="custom-select")
-                                        option 1
-                                        option 2
-                                        option 3
-                                        option 4
-                                        option 2
+                                    select(class="custom-select" id="parentKnowlagePage")
                             
                     div(class="modal-footer")
-                        button(class="btn btn-sm btn-success px-3") OK
+                        button(class="btn btn-sm btn-success px-3 addEdge" ) OK
                         button(type="button" class="btn btn-sm btn-outline-secondary px-3" data-dismiss="modal") close
                     
         include includes/script-links.pug

@@ -7,6 +7,7 @@
     <title>Employee Hierarchical</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
   </head>
   <body>
     <h1 class="p-3 text-center bg-dark text-white mb-3">Employee Hierarchical</h1>
@@ -75,25 +76,11 @@
                 <div class="d-flex align-items-end">
                   <div class="pr-3"> 
                     <label>select target knowlage</label>
-                    <select class="custom-select" id="employeeList">
-                      <option value="[1 , ahmad , 100 , 2 , [a , b , c]]" selected>ahmad</option>
-                      <option value="[2 , amjad , 300 , 3 , [a , c , d]]">amjad</option>
-                      <option value="[3 , ali , 200 , 1 , [a , d , e]]">ali</option>
-                      <option value="[4 , fadi , 400 , 4 , [a , e , f]]">fadi</option>
-                      <option value="[4 , hadi , 700 , 3 , [a , e]]">hadi</option>
-                    </select>
+                    <select class="custom-select" id="employeeList"></select>
                   </div>
                   <div>
                     <label>select employee</label>
-                    <select class="custom-select" id="kownlage-single-select">
-                      <option value="a" selected>a</option>
-                      <option value="c">c</option>
-                      <option value="d">d</option>
-                      <option value="b">b</option>
-                      <option value="t">t</option>
-                      <option value="r">r</option>
-                      <option value="i">i</option>
-                    </select>
+                    <select class="custom-select" id="kownlage-single-select"></select>
                   </div>
                   <button class=" btn btn-info ml-3 text-nowrap px-3 get-to-learn">apply</button>
                 </div>
@@ -107,13 +94,7 @@
               <div class="form-group">
                 <label>find best employee for task</label>
                 <label>select knowlages</label>
-                <select class="custom-select" multiple id="knowlages-multiple-select">
-                  <option value="a" selected>a</option>
-                  <option value="v">v</option>
-                  <option value="c">c</option>
-                  <option value="e">e</option>
-                  <option value="d">d</option>
-                </select>
+                <select class="custom-select" multiple id="knowlages-multiple-select"></select>
                 <div class="d-flex pt-3 align-items-start">
                   <textarea class="form-control" id="best-to-specific-task" type="text" disabled></textarea>
                   <button class=" btn btn-info ml-3 text-nowrap px-3 get-best-to-specific-task">apply</button>
@@ -156,29 +137,23 @@
               <div class="col-12">
                 <div class="form-group">
                   <label>employee name</label>
-                  <input class="form-control" type="text">
+                  <input class="form-control" type="text" id="EmpName">
                   <label>Experience</label>
-                  <input class="form-control" type="number">
+                  <input class="form-control" type="number" id="EmpExperience">
                   <label>employee salary</label>
-                  <input class="form-control" type="number">
+                  <input class="form-control" type="number" id="EmpSalary">
                 </div>
               </div>
               <div class="col-12">
                 <div class="form-group">
                   <label>select employee knowlages</label>
-                  <select class="custom-select" multiple>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>2</option>
-                  </select>
+                  <select class="custom-select" multiple id="Empknowlages"></select>
                 </div>
               </div>
             </div>
           </div>
           <div class="modal-footer">
-            <button class="btn btn-sm btn-success px-3">OK</button>
+            <button class="btn btn-sm btn-success px-3 addEmp">OK</button>
             <button class="btn btn-sm btn-outline-secondary px-3" type="button" data-dismiss="modal">close</button>
           </div>
         </div>
@@ -195,25 +170,19 @@
               <div class="col-12">
                 <div class="form-group">
                   <label>Knowlage name</label>
-                  <input class="form-control" type="text">
+                  <input class="form-control" type="text" id="edgeSecond">
                 </div>
               </div>
               <div class="col-12">
                 <div class="form-group">
                   <label>select parent knowlages node</label>
-                  <select class="custom-select">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>2</option>
-                  </select>
+                  <select class="custom-select" id="parentKnowlagePage"></select>
                 </div>
               </div>
             </div>
           </div>
           <div class="modal-footer">
-            <button class="btn btn-sm btn-success px-3">OK</button>
+            <button class="btn btn-sm btn-success px-3 addEdge">OK</button>
             <button class="btn btn-sm btn-outline-secondary px-3" type="button" data-dismiss="modal">close</button>
           </div>
         </div>

@@ -1,37 +1,433 @@
-let Employee = `
-    % next(parent, child);
-    next(root , a).
-    next(a , b).
-    next(b , c). 
-    next(c , d).
-    next(c , e).
-    next(c , f).
-    next(d , g).
-    next(g , h).
-    next(h , i).
-    next(i , j).
-    next(i , k).
-    next(j , l).
-    next(k , l).
-    next(e , g).
-    next(i , m).
-    next(m , n).
-    next(m , o). 
-    next(m , p).
-    next(n , q). 
-    next(q , r).
-    next(o , r).
-    next(p , r).
-    next(r , s).
-    next(f , t).
-    next(t , u).
-    next(u , v).
-    next(u , w).
-    next(v , x).
-    next(w , y).
-    next(x , z).
-    next(y , z).
+var session = pl.create();
 
+let EmployeesJson   = [];
+let KnowledgesJson  = [];
+let TreeJson        = [];
+
+let Tree        = '';
+let Employee    = '';
+
+$(function() {
+    getKnowledges();
+    getRequireToLearns();
+    getEmployees();
+})
+
+// **************************************
+
+//Finding the right employees for a specific task
+$('.get-best-to-specific-task').on('click', function() {
+    let listKnowlages = $('#knowlages-multiple-select').val();
+    session.consult(Employee, {
+        success: function() { 
+            session.query(`solve(${employeeList}, [${listKnowlages}], Ans).`, {
+                success: function(goal) { 
+                    session.answer({
+                        success: function(answer) {
+                            let textarea = $('#best-to-specific-task');
+                            textarea.val('');
+                            let ans = session.format_answer(answer);
+                            ans = ans.split("=")[1];
+                            ans = ans.trim().substring(1, ans.length-4);
+                            ans = ans.split(',');
+                            ans.forEach(item => {
+                                textarea.val(textarea.val() + item + ', ');
+                            })
+                            textarea.val(textarea.val().substring(0, textarea.val().length-2))
+
+                            if(textarea.val() == '') {
+                                textarea.val('لايوجد موظف يملك الخبرات المطلوبة كاملة');
+                            }
+                        },
+                    });
+                },
+                error: function(err) { console.log(err) }
+            });
+        },
+    });
+})
+
+// **************************************
+
+// Get To Learn
+var callback = function(answer) {
+    if (answer === false || answer === null) {
+        return
+    }
+    // loop
+    let list = $(".list-maps")
+    
+    list.append(`<li>${pl.format_answer(answer) == 'Ans = [] ;' 
+    ? "الموظف متم الالخبرات المطلوبة"
+    : pl.format_answer(answer)}</li>`);
+    session.answer(callback)
+}
+$('.get-to-learn').on('click', () => {
+    $(".list-maps").text("");
+    
+    const selectedeEmployee = $('#employeeList').val();
+    const kownlageSingleSelect = $('#kownlage-single-select').val();
+    var parsed = session.consult(Employee);
+
+    var query = session.query(`getToLearn(${selectedeEmployee}, Ans, ${kownlageSingleSelect}).`);
+
+    session.answer(callback);
+})
+
+// **************************************
+
+// Get Max Salary
+$('.get-max-salary').on('click', () => {
+    session.consult(Employee, {
+        success: function() { 
+            session.query(`maxSalaryList(${employeeList}, Ans).`, {
+                success: function(goal) { 
+                    session.answer({
+                        success: function(answer) {
+                            let res = session.format_answer(answer).split('=')[1];
+                            res = res.split('[')[1];
+                            res = res.split(']')[0];
+                            res = res.split(',');
+                            $('#maxSalary').val(`${res[1]} his salary is : ${res[2]}`);
+                        },
+                    });
+                },
+                error: function(err) { console.log(err) }
+            });
+        },
+    });
+})
+
+// Get Min Salary
+$('.get-min-salary').on('click', () => {
+    session.consult(Employee, {
+        success: function() { 
+            session.query(`minSalaryList(${employeeList}, Ans).`, {
+                success: function(goal) { 
+                    session.answer({
+                        success: function(answer) {
+                            let res = session.format_answer(answer).split('=')[1];
+                            res = res.split('[')[1];
+                            res = res.split(']')[0];
+                            res = res.split(',');
+                            $('#minSalary').val(`${res[1]} his salary is : ${res[2]}`);
+                        },
+                    });
+                },
+                error: function(err) { console.log(err) }
+            });
+        },
+    });
+})
+
+// **************************************
+
+// Get Max Experience
+$('.get-max-exper').on('click', () => {
+    session.consult(Employee, {
+        success: function() { 
+            session.query(`maxExperList(${employeeList}, Ans).`, {
+                success: function(goal) { 
+                    session.answer({
+                        success: function(answer) {
+                            let res = session.format_answer(answer).split('=')[1];
+                            res = res.split('[')[1];
+                            res = res.split(']')[0];
+                            res = res.split(',');
+                            $('#maxExper').val(`${res[1]} has ${res[3]} year of experiance and his salary is : ${res[2]}`);
+                        },
+                    });
+                },
+                error: function(err) { console.log(err) }
+            });
+        },
+    });
+})
+
+// Get Min Experience
+$('.get-min-exper').on('click', () => {
+    session.consult(Employee, {
+        success: function() { 
+            session.query(`minExperList(${employeeList}, Ans).`, {
+                success: function(goal) { 
+                    session.answer({
+                        success: function(answer) {
+                            let res = session.format_answer(answer).split('=')[1];
+                            res = res.split('[')[1];
+                            res = res.split(']')[0];
+                            res = res.split(',');
+                            $('#minExper').val(`${res[1]} has ${res[3]} year of experiance and his salary is : ${res[2]}`);
+                        },
+                    });
+                },
+                error: function(err) { console.log(err) }
+            });
+        },
+    });
+})
+
+// **************************************
+
+// Get Sum of Salary
+$('.get-sum').on('click', () => {
+    session.consult(Employee, {
+        success: function() { 
+            session.query(`sum(${employeeList}, Ans).`, {
+                success: function(goal) { 
+                    session.answer({
+                        success: function(answer) {
+                            let res = session.format_answer(answer).split('=')[1];
+                            $('#sum').val(res.split('.')[0]);
+                        },
+                    });
+                },
+                error: function(err) { console.log(err) }
+            });
+        },
+    });
+})
+
+// **************************************
+// sort table
+$('.merge').on('click', function() {
+    const that = this;
+    session.consult(Employee, {
+        success: function() {
+            let IndexMerge;
+            if($(that).hasClass('min') || $(that).hasClass('max')){
+                $(that).toggleClass('min max');
+                if($(that).hasClass('max')) {
+                    IndexMerge = $(that).data('merge');
+                } else {
+                    IndexMerge = $(that).data('merge') + 1;
+                }
+            } else {
+                $(that).addClass('max');
+                IndexMerge = $(that).data('merge');
+            }
+            $(that).siblings().removeClass('max min');
+            session.query(`mergesort${IndexMerge}(${employeeList}, Ans).`, {
+                success: function(goal) { 
+                    session.answer({
+                        success: function(answer) {
+                            employeeList = session.format_answer(answer).split("=")[1];
+                            employeeList = employeeList.slice(0, -1);
+                            initTable();
+                        },
+                    });
+                },
+                error: function(err) { console.log(err) }
+            });
+        },
+    });
+});
+
+// **************************************
+
+const initTable = function() {
+    $('.table .tbody').empty();
+    let employees = employeeList.split('],[');
+    employees[0] = employees[0].slice(2,employees[0].length)
+    employees[employees.length - 1] = employees[employees.length - 1].slice(0, employees[employees.length - 1].length - 2);
+    employees.forEach((item, index) => {
+        item = item.split(',');
+        let ExperTd = '';
+        let ExperNum = 0;
+        let tr = `<tr>
+            <td>${item[1]}</td>
+            <td>${item[2]}</td>
+            <td>${item[3]}</td>`;
+        for(let i = 4; i <= item.length-1; i++) {
+            ExperTd += ', ' + item[i];
+            ExperNum++;
+        }
+        tr += ` <td>${ExperTd.substring(1, ExperTd.length)}</td>
+                <td>${ExperNum}</td>
+            </tr>`;
+        $('.table .tbody').append(tr);
+    })
+}
+
+// **************************************
+
+function getKnowledges() {
+    $.ajax({
+        url: 'https://localhost:44324/api/My/GetAllKnowledges',
+        type: 'GET',
+    }).done((json) => {
+        KnowledgesJson = json;
+        createKnowledgesSelects(json);
+    });
+}
+function createKnowledgesSelects(json) {
+    $('#kownlage-single-select').empty();
+    $('#knowlages-multiple-select').empty();
+    $('#Empknowlages').empty();
+    $('#parentKnowlagePage').empty();
+    json.forEach((item, index) => {
+        let option = '';
+        option += `<option value="${item.name}`;
+        
+        if(index == 0) {
+            option += `" selected>${item.name}</option>`;
+        } else {
+            option += `">${item.name}</option>`;
+        }
+        $('#kownlage-single-select').append(option);
+        $('#knowlages-multiple-select').append(option);
+        $('#Empknowlages').append(option);
+        $('#parentKnowlagePage').append(option);
+    })
+}
+
+// **************************************
+
+// create employee list and fill select
+function getEmployees() {
+    $.ajax({
+        url: 'https://localhost:44324/api/My/GetAllEmployees',
+        type: 'GET',
+    }).done((json) => {
+        EmployeesJson = json;
+        createEmployeeListAndSelect(json);
+    });
+}
+function createEmployeeListAndSelect(json){
+    employeeList = '[';
+    $('#employeeList').empty();
+    json.forEach((item, index) => {
+        let option = '';
+        let value = '';
+        option += `<option value="`
+        value += `[${item.id} , ${item.name} , ${item.salary} , ${item.experience} , [`;
+        item.knowledgeDtos.forEach((know, indexKnow) => {
+            if(indexKnow == 0) {
+                value += `${know.name} ,`;
+            } else if(indexKnow == item.knowledgeDtos.length - 1) {
+                value += ` ${know.name}`;
+            } else {
+                value += ` ${know.name} ,`;
+            }
+        })
+
+        employeeList = employeeList + value + ']],';
+        option += value;
+        if(index == 0) {
+            option += `]]" selected>${item.name}</option>`;
+        } else {
+            option += `]]">${item.name}</option>`;
+        }
+        $('#employeeList').append(option);
+    })
+    employeeList = employeeList.substring(0, employeeList.length - 1) + "]";
+    initTable();
+}
+
+let employeeList = '';
+// `[[1 , ahmad , 100 , 2 , [a , b , c]],[2 , amjad , 300 , 3 , [a , c , d]],[3 , ali , 200 , 1 , [a , d , e]],[4 , fadi , 400 , 4 , [a , e , f]],[4 , hadi , 700 , 3 , [a , e]]]`;
+// [1 , ahmad , 100 , 2 , [a , b , c]]
+
+// **************************************
+
+// create Tree
+function getRequireToLearns() {
+    $.ajax({
+        url: 'https://localhost:44324/api/My/GetAllRequireToLearns',
+        type: 'GET',
+    }).done((json) => {
+        // set tree
+        TreeJson = json;
+        createTree(json);
+    });
+}
+function createTree(json) {
+    console.log(json)
+    Tree = '';
+    Employee = '';
+    json.forEach((edge) => {
+        Tree += `next(${edge.first} , ${edge.second}).`
+    })
+    Employee = Tree + prologRules;
+}
+// next(a , b).
+
+// **************************************
+
+// add requests
+function postNewEmployee() {
+    const EmpName = $('#EmpName').val();
+    const EmpSalary = $('#EmpSalary').val();
+    const EmpExperience = $('#EmpExperience').val();
+    const Empknowlages = [];
+    $('#Empknowlages').val().forEach((knowlage) => {
+        Empknowlages.push({Name: knowlage})
+    })
+    const data = JSON.stringify({
+        Id : 0,
+        Name : EmpName,
+        Salary: +EmpSalary,
+        Experience: +EmpExperience,
+        KnowledgeDtos: Empknowlages
+    });
+    $.ajax({
+        url: 'https://localhost:44324/api/My/AddEmployee',
+        data: data,
+        type: "POST",
+        dataType: "json",
+        contentType:"application/json; charset=utf-8",
+    }).done((json) => {
+        // set tree
+        EmployeesJson.push(json);
+        createEmployeeListAndSelect(EmployeesJson);
+        $('#EmpName').val('');
+        $('#EmpSalary').val(0);
+        $('#EmpExperience').val(0);
+        $('#addEmployee').modal('hide');
+    });
+}
+$('.addEmp').on('click', function() {
+    postNewEmployee();
+})
+// **************************************
+
+// add edge
+function postNewEdge() {
+    const edgeSecond = $('#edgeSecond').val();
+    const parentKnowlagePage = $('#parentKnowlagePage').val();
+    console.log(edgeSecond, parentKnowlagePage);
+
+    const data = JSON.stringify({
+        first: parentKnowlagePage,
+        second: edgeSecond
+      });
+    $.ajax({
+        url: 'https://localhost:44324/api/My/AddRequireToLearn',
+        data: data,
+        type: "POST",
+        dataType: "json",
+        contentType:"application/json; charset=utf-8",
+    }).done((json) => {
+        // set tree
+        console.log(json);
+        TreeJson.push({
+            first: json.first,
+            second: json.second
+        });
+        createTree(TreeJson);
+        if(json.returningNode !== null) {
+            KnowledgesJson.push({name: json.returningNode});
+            getKnowledges(KnowledgesJson);
+            $('#edgeSecond').val('');
+            $('#addKnowlageNode').modal('hide');
+        }
+    });
+}
+$('.addEdge').on('click', function() {
+    postNewEdge();
+})
+// **************************************
+
+const prologRules = `
     % Reverse List 
     reverse([] , A , A). 
     reverse([H|T] , A , R):-  reverse(T , [H | A] , R).
@@ -283,225 +679,3 @@ let Employee = `
     sum([] , 0).
     sum([[_ , _ , Sal , _ , _] | TEmp] , Sum) :- sum(TEmp , Sum1) , Sum is Sum1 + Sal.
 `;
-let employeeList = `[[1 , ahmad , 100 , 2 , [a , b , c]],[2 , amjad , 300 , 3 , [a , c , d]],[3 , ali , 200 , 1 , [a , d , e]],[4 , fadi , 400 , 4 , [a , e , f]],[4 , hadi , 700 , 3 , [a , e]]]`;
-
-var session = pl.create();
-
-//Finding the right employees for a specific task
-$('.get-best-to-specific-task').on('click', function() {
-    let listKnowlages = $('#knowlages-multiple-select').val();
-    session.consult(Employee, {
-        success: function() { 
-            session.query(`solve(${employeeList}, [${listKnowlages}], Ans).`, {
-                success: function(goal) { 
-                    session.answer({
-                        success: function(answer) {
-                            let textarea = $('#best-to-specific-task');
-                            textarea.val('');
-                            let ans = session.format_answer(answer);
-                            ans = ans.split("=")[1];
-                            ans = ans.trim().substring(1, ans.length-4);
-                            ans = ans.split(',');
-                            ans.forEach(item => {
-                                textarea.val(textarea.val() + item + ', ');
-                            })
-                            textarea.val(textarea.val().substring(0, textarea.val().length-2))
-                        },
-                    });
-                },
-                error: function(err) { console.log(err) }
-            });
-        },
-    });
-})
-
-// Get To Learn
-var count_answers = 0;
-var callback = function(answer) {
-    if (answer === false || answer === null) {
-      return
-    }
-    // loop
-    let list = $(".list-maps")
-    
-    list.append(`<li>${pl.format_answer(answer)}</li>`);
-    session.answer(callback)
-}
-$('.get-to-learn').on('click', () => {
-    $(".list-maps").text("");
-    
-    const selectedeEmployee = $('#employeeList').val();
-    const kownlageSingleSelect = $('#kownlage-single-select').val();
-    var parsed = session.consult(Employee);
-
-    var query = session.query(`getToLearn(${selectedeEmployee}, Ans, ${kownlageSingleSelect}).`);
-
-    session.answer(callback)
-})
-
-
-// Get Max Salary
-$('.get-max-salary').on('click', () => {
-    session.consult(Employee, {
-        success: function() { 
-            session.query(`maxSalaryList(${employeeList}, Ans).`, {
-                success: function(goal) { 
-                    session.answer({
-                        success: function(answer) {
-                            let res = session.format_answer(answer).split('=')[1];
-                            res = res.split('[')[1];
-                            res = res.split(']')[0];
-                            res = res.split(',');
-                            $('#maxSalary').val(`${res[1]} his salary is : ${res[2]}`);
-                        },
-                    });
-                },
-                error: function(err) { console.log(err) }
-            });
-        },
-    });
-})
-
-// Get Min Salary
-$('.get-min-salary').on('click', () => {
-    session.consult(Employee, {
-        success: function() { 
-            session.query(`minSalaryList(${employeeList}, Ans).`, {
-                success: function(goal) { 
-                    session.answer({
-                        success: function(answer) {
-                            let res = session.format_answer(answer).split('=')[1];
-                            res = res.split('[')[1];
-                            res = res.split(']')[0];
-                            res = res.split(',');
-                            $('#minSalary').val(`${res[1]} his salary is : ${res[2]}`);
-                        },
-                    });
-                },
-                error: function(err) { console.log(err) }
-            });
-        },
-    });
-})
-
-// Get Max Experience
-$('.get-max-exper').on('click', () => {
-    session.consult(Employee, {
-        success: function() { 
-            session.query(`maxExperList(${employeeList}, Ans).`, {
-                success: function(goal) { 
-                    session.answer({
-                        success: function(answer) {
-                            let res = session.format_answer(answer).split('=')[1];
-                            res = res.split('[')[1];
-                            res = res.split(']')[0];
-                            res = res.split(',');
-                            $('#maxExper').val(`${res[1]} has ${res[3]} year of experiance and his salary is : ${res[2]}`);
-                        },
-                    });
-                },
-                error: function(err) { console.log(err) }
-            });
-        },
-    });
-})
-
-// Get Min Experience
-$('.get-min-exper').on('click', () => {
-    session.consult(Employee, {
-        success: function() { 
-            session.query(`minExperList(${employeeList}, Ans).`, {
-                success: function(goal) { 
-                    session.answer({
-                        success: function(answer) {
-                            let res = session.format_answer(answer).split('=')[1];
-                            res = res.split('[')[1];
-                            res = res.split(']')[0];
-                            res = res.split(',');
-                            $('#minExper').val(`${res[1]} has ${res[3]} year of experiance and his salary is : ${res[2]}`);
-                        },
-                    });
-                },
-                error: function(err) { console.log(err) }
-            });
-        },
-    });
-})
-
-// Get Sum of Salary
-$('.get-sum').on('click', () => {
-    session.consult(Employee, {
-        success: function() { 
-            session.query(`sum(${employeeList}, Ans).`, {
-                success: function(goal) { 
-                    session.answer({
-                        success: function(answer) {
-                            let res = session.format_answer(answer).split('=')[1];
-                            $('#sum').val(res.split('.')[0]);
-                        },
-                    });
-                },
-                error: function(err) { console.log(err) }
-            });
-        },
-    });
-})
-
-$('.merge').on('click', function() {
-    const that = this;
-    session.consult(Employee, {
-        success: function() {
-            let IndexMerge;
-            if($(that).hasClass('min') || $(that).hasClass('max')){
-                $(that).toggleClass('min max');
-                if($(that).hasClass('max')) {
-                    IndexMerge = $(that).data('merge');
-                } else {
-                    IndexMerge = $(that).data('merge') + 1;
-                }
-            } else {
-                $(that).addClass('max');
-                IndexMerge = $(that).data('merge');
-            }
-            $(that).siblings().removeClass('max min');
-            session.query(`mergesort${IndexMerge}(${employeeList}, Ans).`, {
-                success: function(goal) { 
-                    session.answer({
-                        success: function(answer) {
-                            employeeList = session.format_answer(answer).split("=")[1];
-                            employeeList = employeeList.slice(0, -1);
-                            initTable();
-                        },
-                    });
-                },
-                error: function(err) { console.log(err) }
-            });
-        },
-    });
-});
-
-
-const initTable = function() {
-    $('.table .tbody').empty();
-    let employees = employeeList.split('],[');
-    employees[0] = employees[0].slice(2,employees[0].length)
-    employees[employees.length - 1] = employees[employees.length - 1].slice(0, employees[employees.length - 1].length - 2);
-    employees.forEach((item, index) => {
-        item = item.split(',');
-        let ExperTd = '';
-        let ExperNum = 0;
-        let tr = `<tr>
-            <td>${item[1]}</td>
-            <td>${item[2]}</td>
-            <td>${item[3]}</td>`;
-        for(let i = 4; i <= item.length-1; i++) {
-            ExperTd += ', ' + item[i];
-            ExperNum++;
-        }
-        tr += ` <td>${ExperTd.substring(1, ExperTd.length)}</td>
-                <td>${ExperNum}</td>
-            </tr>`;
-        $('.table .tbody').append(tr);
-    })
-}
-initTable();
