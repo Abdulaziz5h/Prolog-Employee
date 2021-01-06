@@ -11,19 +11,19 @@ simple prolog app to employees Hierarchical
 
 ## stracture
 
-project__________api.
-           |_____dist______js_____script.min.js.
-                    |______css.
-                    |index.html. 
-           |_____src_______sass.
-                    |______scripts____plugin.js // here were we consult and query prolog.
-                    |______view ____pug___index.pug.
+* project__________api.
+*           _____dist______js_____script.min.js.
+*                    |______css.
+*                    |index.html. 
+*           |_____src_______sass.
+*                    |______scripts____plugin.js // here were we consult and query prolog.
+*                    |______view ____pug___index.pug.
                     
 ## how to run live serve to edit
 * open src file by terminal.
 * run commands.
-1-npm install.
-2-gulp.
+* npm install.
+* gulp.
 
 Now you can see result at port :8000.
 
