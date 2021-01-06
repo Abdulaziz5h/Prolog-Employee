@@ -12,7 +12,7 @@ simple prolog app to employees Hierarchical
 ## stracture
 
 * project__________api.
-*           _____dist______js_____script.min.js.
+*           |_____dist______js_____script.min.js.
 *                    |______css.
 *                    |index.html. 
 *           |_____src_______sass.
