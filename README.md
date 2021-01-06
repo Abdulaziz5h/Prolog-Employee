@@ -1,7 +1,7 @@
 # Prolog-Employee
 simple prolog app to employees Hierarchical
 
-# How it work :
+# How it work
 1 - clone project.
 2 - enter api and update-database.
 3 - run api 
